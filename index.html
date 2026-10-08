@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRMINE | پنل سرور ماینکرفت</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      background: #0d1117;
+      color: #f0f6fc;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #58a6ff;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #8b949e;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #3fb950;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #3fb950;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .welcome {
+      margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #8b949e;
+      font-size: 16px;
+    }
+
+    .server-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .server-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .server-name {
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .offline {
+      color: #f85149;
+      background: #2d1616;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .info {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 17px;
+      border-radius: 10px;
+    }
+
+    .info span {
+      display: block;
+      color: #8b949e;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .info strong {
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 9px;
+      padding: 12px 20px;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .start {
+      background: #238636;
+    }
+
+    .start:hover {
+      background: #2ea043;
+    }
+
+    .stop {
+      background: #da3633;
+    }
+
+    .restart {
+      background: #9e6a03;
+    }
+
+    .manage {
+      background: #21262d;
+      border: 1px solid #30363d;
+    }
+
+    .section-title {
+      margin: 35px 0 18px;
+      font-size: 22px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .feature {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 22px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #8b949e;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .console {
+      background: #010409;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      font-family: monospace;
+      color: #8b949e;
+      min-height: 120px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px;
+      color: #6e7681;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .info-grid,
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .server-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .welcome h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">⛏️ SRMINE</div>
+
+  <div class="status">
+    <div class="dot"></div>
+    پنل آنلاین
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="welcome">
+    <h1>پنل مدیریت سرور</h1>
+    <p>سرور Minecraft خودت رو ساده مدیریت کن.</p>
+  </div>
+
+  <div class="server-card">
+
+    <div class="server-top">
+      <div class="server-name">سرور من</div>
+      <div class="offline" id="status">● خاموش</div>
+    </div>
+
+    <div class="info-grid">
+
+      <div class="info">
+        <span>نسخه</span>
+        <strong>Minecraft 1.21</strong>
+      </div>
+
+      <div class="info">
+        <span>نوع سرور</span>
+        <strong>Paper</strong>
+      </div>
+
+      <div class="info">
+        <span>بازیکنان</span>
+        <strong id="players">0 / 20</strong>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+
+      <button class="start" onclick="startServer()">
+        ▶ روشن کردن
+      </button>
+
+      <button class="stop" onclick="stopServer()">
+        ■ خاموش کردن
+      </button>
+
+      <button class="restart" onclick="restartServer()">
+        ↻ ری‌استارت
+      </button>
+
+      <button class="manage" onclick="showConsole()">
+        ⚙ کنسول
+      </button>
+
+    </div>
+
+    <div class="console" id="console">
+      > SRMINE Console<br>
+      > سرور هنوز اجرا نشده...
+    </div>
+
+  </div>
+
+  <h2 class="section-title">امکانات پنل</h2>
+
+  <div class="features">
+
+    <div class="feature">
+      <h3>🧩 پلاگین‌ها</h3>
+      <p>
+        مدیریت و نصب پلاگین‌های سرور از داخل پنل.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>🌍 دنیا و مپ</h3>
+      <p>
+        مدیریت World و فایل‌های مربوط به دنیای سرور.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>⚙️ تنظیمات</h3>
+      <p>
+        تنظیم نسخه، تعداد بازیکنان و تنظیمات اصلی سرور.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>📦 فایل‌ها</h3>
+      <p>
+        دسترسی به فایل‌های سرور و مدیریت آن‌ها.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>👥 بازیکنان</h3>
+      <p>
+        مشاهده بازیکنان آنلاین و مدیریت آن‌ها.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>🛡️ امنیت</h3>
+      <p>
+        تنظیم دسترسی‌ها و مدیریت کاربران پنل.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  SRMINE © 2026 — Minecraft Server Panel
+</footer>
+
+<script>
+
+function startServer() {
+  document.getElementById("status").innerHTML = "● روشن";
+  document.getElementById("status").style.color = "#3fb950";
+
+  document.getElementById("console").innerHTML =
+    "> SRMINE Console<br>" +
+    "> Starting Minecraft server...<br>" +
+    "> Server started successfully!";
+}
+
+function stopServer() {
+  document.getElementById("status").innerHTML = "● خاموش";
+  document.getElementById("status").style.color = "#f85149";
+
+  document.getElementById("console").innerHTML =
+    "> SRMINE Console<br>" +
+    "> Stopping Minecraft server...<br>" +
+    "> Server stopped.";
+}
+
+function restartServer() {
+  document.getElementById("console").innerHTML =
+    "> SRMINE Console<br>" +
+    "> Restarting server...<br>" +
+    "> Server restarted successfully!";
+
+  document.getElementById("status").innerHTML = "● روشن";
+  document.getElementById("status").style.color = "#3fb950";
+}
+
+function showConsole() {
+  document.getElementById("console").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+</body>
+</html>
